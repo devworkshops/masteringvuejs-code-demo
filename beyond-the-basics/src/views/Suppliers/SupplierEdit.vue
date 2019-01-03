@@ -1,7 +1,28 @@
 <template>
   <div>
-    <h1>You're on supplier #{{id}}</h1>
-    <p>{{model}}</p>
+    <h1>Supplier #{{id}}</h1>
+    <form class="form">
+      <div class="form-group row">
+        <label class="col-form-label">Company Name</label>
+        <input type="text" class="form-control" v-model="model.companyName">
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label">Contact Name</label>
+        <input type="text" class="form-control" v-model="model.contactName">
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label">Contact Title</label>
+        <input type="text" class="form-control" v-model="model.contactTitle">
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label">Address</label>
+        <input type="text" class="form-control" v-model="model.address">
+      </div>
+    </form>
+    <p>
+      <button @click.prevent="save()" class="btn btn-primary">Save</button>
+      <button @click.prevent="navigateBack()" class="btn btn-default">Cancel</button>
+    </p>
   </div>
 </template>
 
@@ -21,7 +42,17 @@ export default {
     };
   },
   created() {
-    SupplierService.getSupplier(this.id).then(r => this.model = r.data);
+    SupplierService.getSupplier(this.id).then(r => (this.model = r.data));
+  },
+  methods: {
+    save() {
+      SupplierService.updateSupplier(this.model)
+        .then(r => this.navigateBack())
+        .catch(err => console.error(err));
+    },
+    navigateBack() {
+      this.$router.push("/supplier");
+    }
   }
 };
 </script>
