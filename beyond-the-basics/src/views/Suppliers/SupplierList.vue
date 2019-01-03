@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { SupplierService } from "@/services/NorthwindService.js";
 
 export default {
   data() {
@@ -26,9 +26,8 @@ export default {
     };
   },
   created() {
-    axios
-      .get("//localhost:3000/suppliers")
-      .then(r => this.suppliers = r.data)
+    SupplierService.getSuppliers()
+      .then(r => (this.suppliers = r.data))
       .catch(err => console.error(err));
   }
 };
