@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Beyond the Basics</a>
+      <a class="navbar-brand" href="#">{{title}}</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -31,8 +31,19 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      title: "Beyond the Basics"
+    };
+  }
+};
+</script>
+
+
 <style>
-main.container{
+main.container {
   padding-top: 55px;
 }
 #app {
