@@ -2,9 +2,9 @@
   <div>
     <h1>Suppliers</h1>
     <b-table striped hover :items="suppliers" :fields="fields">
-        <template slot="actions" slot-scope="row">
-            <b-button>Details {{row.id}}</b-button>
-        </template>
+      <template slot="actions" slot-scope="row">
+        <router-link :to="{name:'supplier-edit',params:{id:row.item.id}}">Details</router-link>
+      </template>
     </b-table>
   </div>
 </template>

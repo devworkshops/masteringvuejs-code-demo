@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import NotFound from "./views/NotFound.vue";
 
 Vue.use(Router);
 
@@ -26,6 +27,16 @@ export default new Router({
       path: "/supplier",
       name: "supplier",
       component: () => import("./views/Suppliers/SupplierList.vue")
+    },
+    {
+      path: "/supplier/:id",
+      name: "supplier-edit",
+      component: () => import("./views/Suppliers/SupplierEdit.vue"),
+      props: true
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 });
