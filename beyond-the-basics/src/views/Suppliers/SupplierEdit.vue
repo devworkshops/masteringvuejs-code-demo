@@ -14,9 +14,9 @@
         <label class="col-form-label">Contact Title</label>
         <input type="text" class="form-control" v-model="model.contactTitle">
       </div>
-      <div class="form-group row">
+      <div class="form-group">
         <label class="col-form-label">Address</label>
-        <input type="text" class="form-control" v-model="model.address">
+        <address-form :address="model.address"></address-form>
       </div>
     </form>
     <p>
