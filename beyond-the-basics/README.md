@@ -24,3 +24,10 @@ npm run test
 ```
 npm run lint
 ```
+
+### Running the mock api
+
+```
+npm i -g json-server
+json-server db.json
+```
