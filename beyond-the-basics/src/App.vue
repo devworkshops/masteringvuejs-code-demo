@@ -41,7 +41,6 @@ export default {
 };
 </script>
 
-
 <style>
 main.container {
   padding-top: 55px;
