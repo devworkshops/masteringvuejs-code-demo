@@ -28,6 +28,7 @@
     <main role="main" class="container">
       <router-view/>
     </main>
+    <footer>Northwind Traders © {{new Date()|date('YYYY')}}</footer>
   </div>
 </template>
 

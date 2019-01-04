@@ -12,7 +12,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false;
 
-const requireComponent = require.context('./components',true,/[a-zA-Z]\w+\.(vue|js)$/)
+const requireComponent = require.context('./components', true, /[a-zA-Z]\w+\.(vue|js)$/)
 
 requireComponent.keys().forEach(fileName => {
   // Get component config
@@ -35,6 +35,14 @@ requireComponent.keys().forEach(fileName => {
     componentConfig.default || componentConfig
   )
 });
+
+// Registering filters globally
+const requireFilters = require.context('./filters', true, /[a-zA-Z]\w+\.(vue|js)$/)
+requireFilters.keys().forEach(fileName => {
+  const componentConfig = requireFilters(fileName)
+  const componentName = upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
+  Vue.filter(componentName, componentConfig.default)
+})
 
 new Vue({
   router,
