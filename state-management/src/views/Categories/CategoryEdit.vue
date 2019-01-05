@@ -1,0 +1,58 @@
+<template>
+    <div>
+        <div class="border-bottom mb-3">
+            <h1>Category #{{id}}</h1>
+        </div>
+
+        <form class="form">
+            <div class="form-group row">
+                <label class="col-form-label">Name</label>
+                <input type="text" class="form-control" v-model="category.name">
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label">Description</label>
+                <input type="text" class="form-control" v-model="category.description">
+            </div>
+        </form>
+        <p>
+            <button @click.prevent="save()" class="btn btn-primary">Save</button>
+            <button @click.prevent="navigateBack()" class="btn btn-default">Cancel</button>
+        </p>
+    </div>
+</template>
+
+<script>
+import { CategoriesService } from '@/services/NorthwindService.js'
+
+export default {
+    props: {
+        id: {
+            type: Number,
+            required: true
+        }
+    },
+    data() {
+        return {
+            category: Object
+        }
+    },
+    created() {
+        CategoriesService.get(this.id).then(
+            result => (this.category = result.data)
+        )
+    },
+    methods: {
+        save() {
+            CategoriesService.update(this.category)
+                .then(() => this.navigateBack())
+                .catch(err => console.error(err))
+        },
+        navigateBack() {
+            this.$router.push('/categories')
+        }
+    }
+}
+</script>
+
+<style>
+</style>
