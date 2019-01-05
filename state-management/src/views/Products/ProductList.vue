@@ -19,6 +19,7 @@ export default {
     data() {
         return {
             fields: [
+                { key: 'id', sortable: true },
                 { key: 'name', sortable: true },
                 { key: 'quantityPerUnit', sortable: true },
                 { key: 'unitPrice', sortable: true },

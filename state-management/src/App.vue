@@ -76,9 +76,9 @@ body {
     height: 100%;
 }
 
-/* main > .container {
-    padding: 60px 15px 0;
-} */
+main > .container {
+    padding: 8px 15px 8px 15px;
+}
 
 .feather {
     width: 16px;

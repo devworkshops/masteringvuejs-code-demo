@@ -19,6 +19,7 @@ export default {
     data() {
         return {
             fields: [
+                { key: 'id', sortable: true },
                 { key: 'companyName', sortable: true },
                 { key: 'contactName', sortable: true },
                 { key: 'contactTitle', sortable: true },
