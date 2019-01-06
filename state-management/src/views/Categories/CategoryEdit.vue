@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="border-bottom mb-3">
-            <h1>Category #{{id}}</h1>
+            <h2>{{ this.id === 0 ? 'Add' : 'Edit' }} Category</h2>
         </div>
 
         <form class="form">
@@ -37,15 +37,29 @@ export default {
         }
     },
     created() {
-        CategoriesService.get(this.id).then(
-            result => (this.category = result.data)
-        )
+        if (this.id === 0) {
+            this.category = {
+                id: 0,
+                name: '',
+                description: ''
+            }
+        } else {
+            CategoriesService.get(this.id).then(
+                result => (this.category = result.data)
+            )
+        }
     },
     methods: {
         save() {
-            CategoriesService.update(this.category)
-                .then(() => this.navigateBack())
-                .catch(err => console.error(err))
+            if (this.id === 0) {
+                CategoriesService.create(this.category)
+                    .then(() => this.navigateBack())
+                    .catch(err => console.error(err))
+            } else {
+                CategoriesService.update(this.category)
+                    .then(() => this.navigateBack())
+                    .catch(err => console.error(err))
+            }
         },
         navigateBack() {
             this.$router.push('/categories')

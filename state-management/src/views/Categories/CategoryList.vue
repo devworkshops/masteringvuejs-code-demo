@@ -1,19 +1,17 @@
 <template>
     <div>
-        <div class="d-flex justify-content-between mb-3">
-            <h2>Categories</h2>
-            <div class="btn-toolbar">
-                <button type="button" class="btn btn-primary">
-                    <plus-icon></plus-icon>Add Category
-                </button>
-            </div>
+        <div class="clearfix">
+            <h2 class="float-left">Categories</h2>
+            <b-btn class="float-right" :to="{ name: 'category-edit', params: { id: 0 } }">
+                <plus-icon></plus-icon>Add Category
+            </b-btn>
         </div>
 
         <b-table striped hover :items="categories" :fields="fields">
             <template slot="actions" slot-scope="row">
                 <b-button-toolbar>
                     <b-button-group class="mx-1">
-                        <b-btn :to="{name:'category-edit',params:{id:row.item.id}}">
+                        <b-btn :to="{ name: 'category-edit', params: { id:row.item.id } }">
                             <edit2-icon></edit2-icon>
                         </b-btn>
                         <b-btn
