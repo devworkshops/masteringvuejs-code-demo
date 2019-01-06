@@ -1,0 +1,12 @@
+
+        {
+            path: '/supplier',
+            name: 'supplier',
+            component: () => import('./views/Suppliers/SupplierList.vue')
+        },
+        {
+            path: '/supplier/:id',
+            name: 'supplier-edit',
+            component: () => import('./views/Suppliers/SupplierEdit.vue'),
+            props: true
+        },
