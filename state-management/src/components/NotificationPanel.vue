@@ -7,16 +7,19 @@
             </b-button>
         </div>
 
-        <p>No new notifications for this session.</p>
+        <p v-if="notifications.length === 0">No notifications for this session.</p>
 
-        <b-alert show dismissible variant="success" @dismissed="dismissedNotification(1)">
-            <strong>Success</strong>
-            <br>A new product has been created. A new product has been created.
-        </b-alert>
-
-        <b-alert show dismissible variant="danger" @dismissed="dismissedNotification(2)">
-            <strong>Error</strong>
-            <br>The product has failed to update.
+        <b-alert
+            v-for="notification in notifications"
+            :key="notification.id"
+            show
+            dismissible
+            :variant="notification.context"
+            @dismissed="dismissNotification(notification.id)"
+        >
+            <strong>{{ notification.context === 'success' ? 'Success' : 'Error' }}</strong>
+            <br>
+            {{ notification.message }}
         </b-alert>
     </div>
 </template>
@@ -28,9 +31,25 @@ export default {
     components: {
         XIcon
     },
+    data() {
+        return {
+            notifications: [
+                {
+                    id: 1,
+                    context: 'success',
+                    message: 'A new product has been created.'
+                },
+                {
+                    id: 2,
+                    context: 'danger',
+                    message: 'A product has failed to update.'
+                }
+            ]
+        }
+    },
     methods: {
-        dismissedNotification(id) {
-            console.log('Dismissed notification ' + id)
+        dismissNotification(id) {
+            this.notifications = this.notifications.filter(n => n.id !== id)
         }
     }
 }
@@ -43,6 +62,5 @@ export default {
     color: #999;
 }
 .alert {
-    max-width: 258px;
 }
 </style>

@@ -13,7 +13,7 @@
                         </div>
                     </main>
                 </b-col>
-                <b-collapse id="collapseNotifications" class="w-30 border-left pl-2">
+                <b-collapse id="collapseNotifications" class="border-left pl-2">
                     <b-col>
                         <notification-panel></notification-panel>
                     </b-col>
@@ -55,6 +55,10 @@ body {
 
 main > .container {
     padding: 8px 15px 8px 15px;
+}
+
+#collapseNotifications {
+    width: 30%;
 }
 
 .feather {
