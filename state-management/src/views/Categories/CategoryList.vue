@@ -9,8 +9,8 @@
 
         <b-table striped hover :items="categories" :fields="fields">
             <template slot="actions" slot-scope="row">
-                <b-button-toolbar>
-                    <b-button-group class="mx-1">
+                <b-button-toolbar class="float-right">
+                    <b-button-group>
                         <b-btn :to="{ name: 'category-edit', params: { id:row.item.id } }">
                             <edit2-icon></edit2-icon>
                         </b-btn>

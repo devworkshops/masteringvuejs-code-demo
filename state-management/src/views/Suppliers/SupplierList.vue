@@ -9,8 +9,8 @@
 
         <b-table striped hover :items="suppliers" :fields="fields">
             <template slot="actions" slot-scope="row">
-                <b-button-toolbar>
-                    <b-button-group class="mx-1">
+                <b-button-toolbar class="float-right">
+                    <b-button-group>
                         <b-btn :to="{ name: 'supplier-edit', params: { id:row.item.id } }">
                             <edit2-icon></edit2-icon>
                         </b-btn>
@@ -86,4 +86,7 @@ export default {
 </script>
 
 <style>
+.btn-group > .btn {
+    padding-top: 1px;
+}
 </style>
