@@ -2,7 +2,11 @@
     <div>
         <div class="clearfix">
             <h2 class="float-left">Suppliers</h2>
-            <b-btn class="float-right" :to="{ name: 'supplier-edit', params: { id: 0 } }">
+            <b-btn
+                class="float-right"
+                variant="primary"
+                :to="{ name: 'supplier-edit', params: { id: 0 } }"
+            >
                 <plus-icon></plus-icon>Add
             </b-btn>
         </div>
