@@ -4,11 +4,22 @@
             <nav-bar></nav-bar>
         </header>
 
-        <main role="main" class="flex-shrink-0">
-            <div class="container">
-                <router-view/>
-            </div>
-        </main>
+        <b-container>
+            <b-row>
+                <b-col>
+                    <main role="main" class="flex-shrink-0">
+                        <div class="container">
+                            <router-view/>
+                        </div>
+                    </main>
+                </b-col>
+                <b-collapse id="collapseNotifications" class="w-30 border-left pl-2">
+                    <b-col>
+                        <notification-panel></notification-panel>
+                    </b-col>
+                </b-collapse>
+            </b-row>
+        </b-container>
 
         <footer class="footer mt-auto py-3">
             <div class="container">
@@ -20,10 +31,12 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import NotificationPanel from '@/components/NotificationPanel.vue'
 
 export default {
     components: {
-        NavBar
+        NavBar,
+        NotificationPanel
     }
 }
 </script>
@@ -47,16 +60,6 @@ main > .container {
 .feather {
     width: 16px;
     height: 16px;
-    vertical-align: text-bottom;
-}
-
-.nav > .container {
-    min-height: 56px;
-}
-
-.navbar .nav-link .feather {
-    margin-right: 4px;
-    color: #999;
 }
 
 .footer {

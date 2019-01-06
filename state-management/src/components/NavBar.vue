@@ -6,8 +6,8 @@
             <b-navbar-toggle target="navbarCollapse"></b-navbar-toggle>
 
             <b-collapse is-nav id="navbarCollapse">
-                <b-navbar-nav>
-                    <b-nav-item to="/">
+                <b-navbar-nav class="mr-auto">
+                    <b-nav-item to="/" :exact="true">
                         <home-icon></home-icon>Home
                     </b-nav-item>
                     <b-nav-item to="/categories">
@@ -23,6 +23,12 @@
                         <info-icon></info-icon>About
                     </b-nav-item>
                 </b-navbar-nav>
+                <b-navbar-nav>
+                    <b-nav-item v-b-toggle.collapseNotifications>
+                        <bell-icon></bell-icon>Notifications
+                        <b-badge>2</b-badge>
+                    </b-nav-item>
+                </b-navbar-nav>
             </b-collapse>
         </div>
     </b-navbar>
@@ -34,7 +40,8 @@ import {
     ListIcon,
     ShoppingCartIcon,
     PackageIcon,
-    InfoIcon
+    InfoIcon,
+    BellIcon
 } from 'vue-feather-icons'
 
 export default {
@@ -43,10 +50,19 @@ export default {
         ListIcon,
         ShoppingCartIcon,
         PackageIcon,
-        InfoIcon
+        InfoIcon,
+        BellIcon
     }
 }
 </script>
 
 <style scoped>
+.nav > .container {
+    min-height: 56px;
+}
+
+.navbar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+}
 </style>
