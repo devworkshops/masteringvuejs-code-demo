@@ -19,6 +19,9 @@
                     <b-nav-item to="/suppliers">
                         <package-icon></package-icon>Suppliers
                     </b-nav-item>
+                    <b-nav-item to="/about">
+                        <info-icon></info-icon>About
+                    </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </div>
@@ -30,7 +33,8 @@ import {
     HomeIcon,
     ListIcon,
     ShoppingCartIcon,
-    PackageIcon
+    PackageIcon,
+    InfoIcon
 } from 'vue-feather-icons'
 
 export default {
@@ -38,7 +42,8 @@ export default {
         HomeIcon,
         ListIcon,
         ShoppingCartIcon,
-        PackageIcon
+        PackageIcon,
+        InfoIcon
     }
 }
 </script>
