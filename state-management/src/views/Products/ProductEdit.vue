@@ -86,17 +86,7 @@ export default {
         return {
             categories: [],
             suppliers: [],
-            product: Object
-        }
-    },
-    created() {
-        CategoriesService.getAll().then(
-            result => (this.categories = result.data)
-        )
-        SuppliersService.getAll().then(result => (this.suppliers = result.data))
-
-        if (this.id === 0) {
-            this.product = {
+            product: {
                 id: 0,
                 supplierID: null,
                 categoryID: null,
@@ -108,7 +98,16 @@ export default {
                 discontinued: false,
                 name: ''
             }
-        } else {
+        }
+    },
+    created() {
+        CategoriesService.getAll().then(
+            result => (this.categories = result.data)
+        )
+
+        SuppliersService.getAll().then(result => (this.suppliers = result.data))
+
+        if (this.id !== 0) {
             ProductsService.get(this.id).then(
                 result => (this.product = result.data)
             )

@@ -52,7 +52,13 @@ export const SuppliersService = {
     get(id) {
         return apiClient.get('/suppliers/' + id)
     },
+    create(supplier) {
+        return apiClient.post('/suppliers/', supplier)
+    },
     update(supplier) {
         return apiClient.put('/suppliers/' + supplier.id, supplier)
+    },
+    delete(id) {
+        return apiClient.delete('/suppliers/' + id)
     }
 }

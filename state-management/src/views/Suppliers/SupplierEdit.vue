@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="border-bottom mb-3">
-            <h1>Supplier #{{id}}</h1>
+            <h2>{{ this.id === 0 ? 'Add' : 'Edit' }} Supplier</h2>
         </div>
 
         <form class="form">
@@ -41,19 +41,40 @@ export default {
     },
     data() {
         return {
-            supplier: Object
+            supplier: {
+                id: 0,
+                companyName: '',
+                contactName: '',
+                contactTitle: '',
+                address: {
+                    street: '',
+                    city: '',
+                    region: '',
+                    postalCode: null,
+                    country: '',
+                    phone: ''
+                }
+            }
         }
     },
     created() {
-        SuppliersService.get(this.id).then(
-            result => (this.supplier = result.data)
-        )
+        if (this.id !== 0) {
+            SuppliersService.get(this.id).then(
+                result => (this.supplier = result.data)
+            )
+        }
     },
     methods: {
         save() {
-            SuppliersService.update(this.supplier)
-                .then(() => this.navigateBack())
-                .catch(err => console.error(err))
+            if (this.id === 0) {
+                SuppliersService.create(this.supplier)
+                    .then(() => this.navigateBack())
+                    .catch(err => console.error(err))
+            } else {
+                SuppliersService.update(this.supplier)
+                    .then(() => this.navigateBack())
+                    .catch(err => console.error(err))
+            }
         },
         navigateBack() {
             this.$router.push('/suppliers')

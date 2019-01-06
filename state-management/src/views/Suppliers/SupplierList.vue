@@ -1,21 +1,54 @@
 <template>
     <div>
-        <div class="border-bottom mb-3">
-            <h1>Suppliers</h1>
+        <div class="clearfix">
+            <h2 class="float-left">Suppliers</h2>
+            <b-btn class="float-right" :to="{ name: 'supplier-edit', params: { id: 0 } }">
+                <plus-icon></plus-icon>Add
+            </b-btn>
         </div>
 
         <b-table striped hover :items="suppliers" :fields="fields">
             <template slot="actions" slot-scope="row">
-                <router-link :to="{name:'supplier-edit',params:{id:row.item.id}}">Edit</router-link>
+                <b-button-toolbar>
+                    <b-button-group class="mx-1">
+                        <b-btn :to="{ name: 'supplier-edit', params: { id:row.item.id } }">
+                            <edit2-icon></edit2-icon>
+                        </b-btn>
+                        <b-btn
+                            variant="danger"
+                            @click="supplierToDelete = row.item"
+                            v-b-modal.deleteModal
+                        >
+                            <x-icon></x-icon>
+                        </b-btn>
+                    </b-button-group>
+                </b-button-toolbar>
             </template>
         </b-table>
+
+        <b-modal
+            id="deleteModal"
+            title="Delete Supplier?"
+            centered
+            ok-title="Delete"
+            ok-variant="danger"
+            @ok="deleteConfirmed"
+        >
+            <p class="my-4">Are you sure you want to delete '{{ supplierToDelete.companyName }}'?</p>
+        </b-modal>
     </div>
 </template>
 
 <script>
 import { SuppliersService } from '@/services/NorthwindService.js'
+import { PlusIcon, Edit2Icon, XIcon } from 'vue-feather-icons'
 
 export default {
+    components: {
+        PlusIcon,
+        Edit2Icon,
+        XIcon
+    },
     data() {
         return {
             fields: [
@@ -26,7 +59,22 @@ export default {
                 { key: 'address.city' },
                 { key: 'actions' }
             ],
-            suppliers: []
+            suppliers: [],
+            supplierToDelete: {}
+        }
+    },
+    methods: {
+        deleteConfirmed() {
+            if (this.supplierToDelete) {
+                SuppliersService.delete(this.supplierToDelete.id)
+                    .then(
+                        () =>
+                            (this.suppliers = this.suppliers.filter(
+                                p => p.id !== this.supplierToDelete.id
+                            ))
+                    )
+                    .catch(err => console.error(err))
+            }
         }
     },
     created() {

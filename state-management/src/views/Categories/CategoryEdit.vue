@@ -33,17 +33,15 @@ export default {
     },
     data() {
         return {
-            category: Object
-        }
-    },
-    created() {
-        if (this.id === 0) {
-            this.category = {
+            category: {
                 id: 0,
                 name: '',
                 description: ''
             }
-        } else {
+        }
+    },
+    created() {
+        if (this.id !== 0) {
             CategoriesService.get(this.id).then(
                 result => (this.category = result.data)
             )
