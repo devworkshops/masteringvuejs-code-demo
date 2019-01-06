@@ -16,13 +16,28 @@
                         <b-btn :to="{name:'category-edit',params:{id:row.item.id}}">
                             <edit2-icon></edit2-icon>
                         </b-btn>
-                        <b-btn variant="danger">
+                        <b-btn
+                            variant="danger"
+                            @click="categoryToDelete = row.item"
+                            v-b-modal.deleteModal
+                        >
                             <x-icon></x-icon>
                         </b-btn>
                     </b-button-group>
                 </b-button-toolbar>
             </template>
         </b-table>
+
+        <b-modal
+            id="deleteModal"
+            title="Delete Category?"
+            centered
+            ok-title="Delete"
+            ok-variant="danger"
+            @ok="deleteConfirmed"
+        >
+            <p class="my-4">Are you sure you want to delete '{{ categoryToDelete.name }}'?</p>
+        </b-modal>
     </div>
 </template>
 
@@ -44,12 +59,27 @@ export default {
                 { key: 'description', sortable: true },
                 { key: 'actions' }
             ],
-            categories: ['Test']
+            categories: [],
+            categoryToDelete: {}
+        }
+    },
+    methods: {
+        deleteConfirmed() {
+            if (this.categoryToDelete) {
+                CategoriesService.delete(this.categoryToDelete.id)
+                    .then(
+                        () =>
+                            (this.categories = this.categories.filter(
+                                c => c.id !== this.categoryToDelete.id
+                            ))
+                    )
+                    .catch(err => console.error(err))
+            }
         }
     },
     created() {
         CategoriesService.getAll()
-            .then(r => (this.categories = r.data))
+            .then(result => (this.categories = result.data))
             .catch(err => console.error(err))
     }
 }
