@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="border-bottom mb-3">
-            <h1>Product #{{id}}</h1>
+            <h2>{{ this.id === 0 ? 'Add' : 'Edit' }} Product</h2>
         </div>
 
         <form class="form">
@@ -94,15 +94,37 @@ export default {
             result => (this.categories = result.data)
         )
         SuppliersService.getAll().then(result => (this.suppliers = result.data))
-        ProductsService.get(this.id).then(
-            result => (this.product = result.data)
-        )
+
+        if (this.id === 0) {
+            this.product = {
+                id: 0,
+                supplierID: null,
+                categoryID: null,
+                quantityPerUnit: '',
+                unitPrice: 0.0,
+                unitsInStock: 0,
+                unitsOnOrder: 0,
+                reorderLevel: 0,
+                discontinued: false,
+                name: ''
+            }
+        } else {
+            ProductsService.get(this.id).then(
+                result => (this.product = result.data)
+            )
+        }
     },
     methods: {
         save() {
-            ProductsService.update(this.product)
-                .then(() => this.navigateBack())
-                .catch(err => console.error(err))
+            if (this.id === 0) {
+                ProductsService.create(this.product)
+                    .then(() => this.navigateBack())
+                    .catch(err => console.error(err))
+            } else {
+                ProductsService.update(this.product)
+                    .then(() => this.navigateBack())
+                    .catch(err => console.error(err))
+            }
         },
         navigateBack() {
             this.$router.push('/products')

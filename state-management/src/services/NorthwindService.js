@@ -34,8 +34,14 @@ export const ProductsService = {
     get(id) {
         return apiClient.get('/products/' + id)
     },
+    create(product) {
+        return apiClient.post('/products/', product)
+    },
     update(product) {
         return apiClient.put('/products/' + product.id, product)
+    },
+    delete(id) {
+        return apiClient.delete('/products/' + id)
     }
 }
 

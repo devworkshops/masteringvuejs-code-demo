@@ -3,7 +3,7 @@
         <div class="clearfix">
             <h2 class="float-left">Categories</h2>
             <b-btn class="float-right" :to="{ name: 'category-edit', params: { id: 0 } }">
-                <plus-icon></plus-icon>Add Category
+                <plus-icon></plus-icon>Add
             </b-btn>
         </div>
 
