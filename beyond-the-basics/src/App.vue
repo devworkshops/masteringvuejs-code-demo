@@ -1,67 +1,66 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">{{title}}</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <router-link class="nav-link" to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/supplier">Suppliers</router-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <header>
+      <nav-bar></nav-bar>
+    </header>
 
-    <main role="main" class="container">
-      <router-view/>
-    </main>
-    <footer>Northwind Traders © {{new Date()|date('YYYY')}}</footer>
+    <b-container>
+      <b-row>
+        <b-col>
+          <main role="main" class="flex-shrink-0">
+            <div class="container">
+              <router-view/>
+            </div>
+          </main>
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">Northwind Traders &copy; {{new Date()|date('YYYY')}}</span>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue'
+
 export default {
-  data() {
-    return {
-      title: "Beyond the Basics"
-    };
-  }
-};
+    components: {
+        NavBar
+    }
+}
 </script>
 
 <style>
-main.container {
-  padding-top: 55px;
-}
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+html,
+body {
+    height: 100%;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+main > .container {
+    padding: 8px 15px 8px 15px;
+}
+
+.feather {
+    width: 16px;
+    height: 16px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
 }
 </style>

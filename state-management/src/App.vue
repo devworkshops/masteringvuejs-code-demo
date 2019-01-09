@@ -1,32 +1,31 @@
 <template>
-    <div id="app">
-        <header>
-            <nav-bar></nav-bar>
-        </header>
-
-        <b-container>
-            <b-row>
-                <b-col>
-                    <main role="main" class="flex-shrink-0">
-                        <div class="container">
-                            <router-view/>
-                        </div>
-                    </main>
-                </b-col>
-                <b-collapse id="collapseNotifications" class="border-left pl-2">
-                    <b-col>
-                        <notification-panel></notification-panel>
-                    </b-col>
-                </b-collapse>
-            </b-row>
-        </b-container>
-
-        <footer class="footer mt-auto py-3">
+  <div id="app">
+    <header>
+      <nav-bar></nav-bar>
+    </header>
+    <b-container>
+      <b-row>
+        <b-col>
+          <main role="main" class="flex-shrink-0">
             <div class="container">
-                <span class="text-muted">Northwind Traders &copy; {{new Date()|date('YYYY')}}</span>
+              <router-view/>
             </div>
-        </footer>
-    </div>
+          </main>
+        </b-col>
+        <b-collapse id="collapseNotifications" class="w-30 border-left pl-2">
+          <b-col>
+            <notification-panel></notification-panel>
+          </b-col>
+        </b-collapse>
+      </b-row>
+    </b-container>
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">Northwind Traders &copy; {{new Date()|date('YYYY')}}</span>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>

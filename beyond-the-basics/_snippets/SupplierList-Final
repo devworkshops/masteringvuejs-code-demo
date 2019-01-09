@@ -11,7 +11,6 @@
 
 <script>
 import { SupplierService } from "@/services/NorthwindService.js";
-
 export default {
   data() {
     return {
