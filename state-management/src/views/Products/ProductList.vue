@@ -46,6 +46,7 @@
 <script>
 import { ProductsService } from '@/services/NorthwindService.js'
 import { PlusIcon, Edit2Icon, XIcon } from 'vue-feather-icons'
+import { mapActions } from 'vuex'
 
 export default {
     components: {
@@ -69,23 +70,38 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['raiseSuccessNotification', 'raiseErrorNotification']),
         deleteConfirmed() {
             if (this.productToDelete) {
                 ProductsService.delete(this.productToDelete.id)
-                    .then(
-                        () =>
-                            (this.products = this.products.filter(
-                                p => p.id !== this.productToDelete.id
-                            ))
-                    )
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The product '${
+                                this.productToDelete.name
+                            }' was successfully deleted.`
+                        )
+                        this.products = this.products.filter(
+                            p => p.id !== this.productToDelete.id
+                        )
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to delete the product '${
+                                this.productToDelete.name
+                            }'.`
+                        )
+                    })
             }
         }
     },
     created() {
         ProductsService.getAll()
             .then(r => (this.products = r.data))
-            .catch(err => console.error(err))
+            .catch(() => {
+                this.raiseErrorNotification(
+                    'A server error occurred attempting to get all products.'
+                )
+            })
     }
 }
 </script>

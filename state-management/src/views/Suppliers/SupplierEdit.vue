@@ -31,6 +31,7 @@
 
 <script>
 import { SuppliersService } from '@/services/NorthwindService.js'
+import { mapActions } from 'vuex'
 
 export default {
     props: {
@@ -65,15 +66,42 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['raiseSuccessNotification', 'raiseErrorNotification']),
         save() {
             if (this.id === 0) {
                 SuppliersService.create(this.supplier)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The supplier '${
+                                this.supplier.companyName
+                            }' was successfully created.`
+                        )
+                        this.navigateBack()
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to create the supplier '${
+                                this.supplier.companyName
+                            }'.`
+                        )
+                    })
             } else {
                 SuppliersService.update(this.supplier)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The supplier '${
+                                this.supplier.companyName
+                            }' was successfully updated.`
+                        )
+                        this.navigateBack()
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to updated the supplier '${
+                                this.supplier.companyName
+                            }'.`
+                        )
+                    })
             }
         },
         navigateBack() {

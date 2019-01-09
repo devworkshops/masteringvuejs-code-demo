@@ -74,6 +74,7 @@ import {
     SuppliersService,
     ProductsService
 } from '@/services/NorthwindService.js'
+import { mapActions } from 'vuex'
 
 export default {
     props: {
@@ -114,15 +115,42 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['raiseSuccessNotification', 'raiseErrorNotification']),
         save() {
             if (this.id === 0) {
                 ProductsService.create(this.product)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The product '${
+                                this.product.name
+                            }' was successfully created.`
+                        )
+                        this.navigateBack()
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to create the product '${
+                                this.product.name
+                            }'.`
+                        )
+                    })
             } else {
                 ProductsService.update(this.product)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The product '${
+                                this.product.name
+                            }' was successfully updated.`
+                        )
+                        this.navigateBack()
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to update the product '${
+                                this.product.name
+                            }'.`
+                        )
+                    })
             }
         },
         navigateBack() {
