@@ -14,7 +14,7 @@
         <label class="col-form-label">Contact Title</label>
         <input type="text" class="form-control" v-model="model.contactTitle">
       </div>
-      <div class="form-group">
+      <div class="form-group" v-if="model.address">
         <label class="col-form-label">Address</label>
         <address-form :address="model.address"></address-form>
       </div>
@@ -51,7 +51,7 @@ export default {
         .catch(err => console.error(err));
     },
     navigateBack() {
-      this.$router.push("/supplier");
+      this.$router.push("/suppliers");
     }
   }
 };

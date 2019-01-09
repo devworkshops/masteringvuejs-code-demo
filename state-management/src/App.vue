@@ -3,7 +3,6 @@
         <header>
             <nav-bar></nav-bar>
         </header>
-
         <b-container>
             <b-row>
                 <b-col>
@@ -13,7 +12,7 @@
                         </div>
                     </main>
                 </b-col>
-                <b-collapse id="collapseNotifications" class="border-left pl-2">
+                <b-collapse id="collapseNotifications" class="w-30 border-left pl-2">
                     <b-col>
                         <notification-panel></notification-panel>
                     </b-col>

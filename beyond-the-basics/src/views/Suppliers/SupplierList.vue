@@ -3,7 +3,7 @@
     <h1>Suppliers</h1>
     <b-table striped hover :items="suppliers" :fields="fields">
       <template slot="actions" slot-scope="row">
-        <router-link :to="{name:'supplier-edit',params:{id:row.item.id}}">Edit</router-link>
+        <router-link :to="{name:'suppliers-edit',params:{id:row.item.id}}">Edit</router-link>
       </template>
     </b-table>
   </div>
@@ -11,7 +11,6 @@
 
 <script>
 import { SupplierService } from "@/services/NorthwindService.js";
-
 export default {
   data() {
     return {

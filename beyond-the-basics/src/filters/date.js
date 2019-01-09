@@ -1,11 +1,11 @@
 import moment from 'moment'
 
-export default function (value, format) {
-    const defaultFormat = 'DD/MM/YYYY hh:mm';
-    if (!!!format) {
-        format = defaultFormat;
+export default function(value, format) {
+    const defaultFormat = 'DD/MM/YYYY hh:mm'
+    if (!format) {
+        format = defaultFormat
     }
-    if (!!value) {
+    if (value) {
         return moment(value).format(format)
     }
 }
