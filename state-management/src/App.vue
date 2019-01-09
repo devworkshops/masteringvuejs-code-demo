@@ -23,7 +23,12 @@
 
         <footer class="footer mt-auto py-3">
             <div class="container">
-                <span class="text-muted">Northwind Traders &copy; {{new Date()|date('YYYY')}}</span>
+                <span class="text-muted">
+                    Northwind Traders &copy; {{new Date()|date('YYYY')}}
+                    - Build: {{ release.build }}
+                    - Environment: {{ release.environment }}
+                    - Failed Health Checks: {{ failedHealthCheckCount }}
+                </span>
             </div>
         </footer>
     </div>
@@ -32,11 +37,18 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import NotificationPanel from '@/components/NotificationPanel.vue'
+import { mapState } from 'vuex'
 
 export default {
     components: {
         NavBar,
         NotificationPanel
+    },
+    computed: {
+        ...mapState(['release', 'healthChecks']),
+        failedHealthCheckCount() {
+            return this.$store.getters.failedHealthCheckCount
+        }
     }
 }
 </script>

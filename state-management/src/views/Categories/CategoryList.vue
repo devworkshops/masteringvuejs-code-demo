@@ -46,6 +46,7 @@
 <script>
 import { CategoriesService } from '@/services/NorthwindService.js'
 import { PlusIcon, Edit2Icon, XIcon } from 'vue-feather-icons'
+import { mapActions } from 'vuex'
 
 export default {
     components: {
@@ -66,23 +67,38 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['raiseSuccessNotification', 'raiseErrorNotification']),
         deleteConfirmed() {
             if (this.categoryToDelete) {
                 CategoriesService.delete(this.categoryToDelete.id)
-                    .then(
-                        () =>
-                            (this.categories = this.categories.filter(
-                                c => c.id !== this.categoryToDelete.id
-                            ))
-                    )
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.categories = this.categories.filter(
+                            c => c.id !== this.categoryToDelete.id
+                        )
+                        this.raiseSuccessNotification(
+                            `The category '${
+                                this.categoryToDelete.name
+                            }' was successfully deleted.`
+                        )
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to delete the category '${
+                                this.categoryToDelete.name
+                            }'.`
+                        )
+                    })
             }
         }
     },
     created() {
         CategoriesService.getAll()
             .then(result => (this.categories = result.data))
-            .catch(err => console.error(err))
+            .catch(() => {
+                this.raiseErrorNotification(
+                    'A server error occurred attempting to get all categories.'
+                )
+            })
     }
 }
 </script>

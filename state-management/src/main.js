@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
+import store from './store'
 
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
@@ -54,5 +55,6 @@ requireFilters.keys().forEach(fileName => {
 
 new Vue({
     router,
+    store,
     render: h => h(App)
 }).$mount('#app')

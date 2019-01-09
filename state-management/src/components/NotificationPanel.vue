@@ -26,30 +26,16 @@
 
 <script>
 import { XIcon } from 'vue-feather-icons'
+import { mapState } from 'vuex'
 
 export default {
     components: {
         XIcon
     },
-    data() {
-        return {
-            notifications: [
-                {
-                    id: 1,
-                    context: 'success',
-                    message: 'A new product has been created.'
-                },
-                {
-                    id: 2,
-                    context: 'danger',
-                    message: 'A product has failed to update.'
-                }
-            ]
-        }
-    },
+    computed: mapState(['notifications']),
     methods: {
         dismissNotification(id) {
-            this.notifications = this.notifications.filter(n => n.id !== id)
+            this.$store.commit('dismissNotification', id)
         }
     }
 }
@@ -60,7 +46,5 @@ export default {
     height: 28px;
     width: 28px;
     color: #999;
-}
-.alert {
 }
 </style>

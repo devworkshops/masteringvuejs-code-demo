@@ -26,7 +26,7 @@
                 <b-navbar-nav>
                     <b-nav-item v-b-toggle.collapseNotifications>
                         <bell-icon></bell-icon>Notifications
-                        <b-badge>2</b-badge>
+                        <b-badge>{{ $store.getters.notificationCount }}</b-badge>
                     </b-nav-item>
                 </b-navbar-nav>
             </b-collapse>

@@ -23,6 +23,7 @@
 
 <script>
 import { CategoriesService } from '@/services/NorthwindService.js'
+import { mapActions } from 'vuex'
 
 export default {
     props: {
@@ -48,15 +49,42 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['raiseSuccessNotification', 'raiseErrorNotification']),
         save() {
             if (this.id === 0) {
                 CategoriesService.create(this.category)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The category '${
+                                this.category.name
+                            }' was successfully created.`
+                        )
+                        this.navigateBack()
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to create the category '${
+                                this.category.name
+                            }'.`
+                        )
+                    })
             } else {
                 CategoriesService.update(this.category)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.raiseSuccessNotification(
+                            `The category '${
+                                this.category.name
+                            }' was successfully updated.`
+                        )
+                        this.navigateBack()
+                    })
+                    .catch(() => {
+                        this.raiseErrorNotification(
+                            `A server error occurred attempting to update the category '${
+                                this.category.name
+                            }'.`
+                        )
+                    })
             }
         },
         navigateBack() {
