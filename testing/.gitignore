@@ -2,6 +2,7 @@
 node_modules
 /dist
 /coverage
+/tests/e2e/videos
 
 # local env files
 .env.local
