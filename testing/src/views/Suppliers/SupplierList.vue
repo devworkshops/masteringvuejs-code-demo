@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Suppliers</h1>
+    <router-link class="btn btn-primary" to="/suppliers/new">+</router-link>
     <b-table striped hover :items="suppliers" :fields="fields">
       <template slot="actions" slot-scope="row">
         <router-link :to="{name:'suppliers-edit',params:{id:row.item.id}}" class="suppliers-edit">Edit</router-link>

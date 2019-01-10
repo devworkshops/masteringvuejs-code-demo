@@ -17,6 +17,9 @@ export const SupplierService = {
         return apiClient.get('/suppliers/' + id)
     },
     updateSupplier(supplier) {
-        return apiClient.put('/suppliers/' + supplier.id, supplier);
+        return apiClient.put('/suppliers/' + supplier.id, supplier)
+    },
+    createSupplier(supplier) {
+        return apiClient.post('/suppliers', supplier)
     }
 }

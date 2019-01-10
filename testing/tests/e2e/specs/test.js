@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
-    it('Visits the app root url', () => {
+describe('Suppliers', () => {
+    it('Should update existing supplier', () => {
         cy.visit('/suppliers')
         cy.contains('h1', 'Suppliers')
         cy.get('a.suppliers-edit:first').click()
@@ -9,5 +9,15 @@ describe('My First Test', () => {
         cy.get('input#companyNameField').type('NEW COMPANY')
         cy.get('button#saveButton').click()
         cy.contains('table tbody td:first-child', 'NEW COMPANY')
+    })
+
+    it('Should create new supplier', () => {
+        cy.visit('/suppliers/new')
+        cy.get('input#companyNameField').type('NEW COMPANY')
+        cy.get('input#contactNameField').type('NEW CONTACT')
+        cy.get('input#contactTitleField').type('CONTACT TITLE')
+        cy.get('input#contactNameField').type('.')
+        cy.get('button#saveButton').click()
+        cy.contains('table tbody tr:last-child td:first-child', 'NEW COMPANY')
     })
 })
