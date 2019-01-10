@@ -4,7 +4,7 @@
     <form class="form">
       <div class="form-group row">
         <label class="col-form-label">Company Name</label>
-        <input type="text" class="form-control" v-model="model.companyName">
+        <input type="text" class="form-control" id="companyNameField" v-model="model.companyName">
       </div>
       <div class="form-group row">
         <label class="col-form-label">Contact Name</label>
@@ -20,7 +20,7 @@
       </div>
     </form>
     <p>
-      <button @click.prevent="save()" class="btn btn-primary">Save</button>
+      <button @click.prevent="save()" class="btn btn-primary" id="saveButton">Save</button>
       <button @click.prevent="navigateBack()" class="btn btn-default">Cancel</button>
     </p>
   </div>
