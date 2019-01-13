@@ -7,16 +7,16 @@ env:
   - WEBPACK_VERSION=4
 install:
   # Use npm 5.7.x since it has introduced `npm ci`
+  - cd testing
   - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
   - npm ci
 before_script:
   # Install Webpack version
+  - cd testing
   - if [[ -n "$WEBPACK_VERSION" ]]; then npm install --no-save webpack@$WEBPACK_VERSION; fi
 branches:
   # trying to limit to the testing branch only
   - testing
-script:
-  - cd testing
 stages:
   - lint
   - test
