@@ -1,57 +1,41 @@
 <template>
-  <b-navbar toggleable="md" type="dark" placement="fixed" fill="false" variant="dark">
-    <div class="container">
-      <b-navbar-brand to="/">Northwind Traders</b-navbar-brand>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Northwind Traders</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarCollapse"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <b-navbar-toggle target="navbarCollapse"></b-navbar-toggle>
-
-      <b-collapse is-nav id="navbarCollapse">
-        <b-navbar-nav class="mr-auto">
-          <b-nav-item to="/" :exact="true">
-            <home-icon></home-icon>Home
-          </b-nav-item>
-          <b-nav-item to="/categories">
-            <list-icon></list-icon>Categories
-          </b-nav-item>
-          <b-nav-item to="/products">
-            <shopping-cart-icon></shopping-cart-icon>Products
-          </b-nav-item>
-          <b-nav-item to="/suppliers">
-            <package-icon></package-icon>Suppliers
-          </b-nav-item>
-          <b-nav-item to="/about">
-            <info-icon></info-icon>About
-          </b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav>
-          <b-nav-item v-b-toggle.collapseNotifications>
-            <bell-icon></bell-icon>Notifications
-            <b-badge>2</b-badge>
-          </b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </div>
-  </b-navbar>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <router-link to="/" :exact="true" class="nav-link">
+                            <home-icon></home-icon>Home
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/suppliers" :exact="true" class="nav-link">
+                            <package-icon></package-icon>Suppliers
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </template>
 
 <script>
-import {
-    HomeIcon,
-    ListIcon,
-    ShoppingCartIcon,
-    PackageIcon,
-    InfoIcon,
-    BellIcon
-} from 'vue-feather-icons'
+import { HomeIcon, PackageIcon } from 'vue-feather-icons'
 
 export default {
     components: {
         HomeIcon,
-        ListIcon,
-        ShoppingCartIcon,
-        PackageIcon,
-        InfoIcon,
-        BellIcon
+        PackageIcon
     }
 }
 </script>

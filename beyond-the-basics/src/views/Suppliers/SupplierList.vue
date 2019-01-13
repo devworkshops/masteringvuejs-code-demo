@@ -1,36 +1,46 @@
 <template>
-  <div>
-    <h1>Suppliers</h1>
-    <b-table striped hover :items="suppliers" :fields="fields">
-      <template slot="actions" slot-scope="row">
-        <router-link :to="{name:'suppliers-edit',params:{id:row.item.id}}">Edit</router-link>
-      </template>
-    </b-table>
-  </div>
+    <div>
+        <h1>Suppliers</h1>
+        <table class="table" v-if="suppliers.length > 0">
+            <tr>
+                <th>Company Name</th>
+                <th>Contact Name</th>
+                <th>Contact Title</th>
+                <th>Address City</th>
+                <th>Actions</th>
+            </tr>
+            <tr v-for="supplier in suppliers" :key="supplier.id">
+                <td>{{ supplier.companyName }}</td>
+                <td>{{ supplier.contactName }}</td>
+                <td>{{ supplier.contactTitle }}</td>
+                <td>{{ supplier.address.city }}</td>
+                <td>
+                    <router-link
+                        tag="button"
+                        :to="{name:'suppliers-edit',params:{id:supplier.id}}"
+                        class="btn btn-primary"
+                    >Edit</router-link>
+                </td>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <script>
-import { SupplierService } from "@/services/NorthwindService.js";
+import { SupplierService } from '@/services/NorthwindService.js'
 export default {
-  data() {
-    return {
-      fields: [
-        { key: "companyName", sortable: true },
-        { key: "contactName", sortable: true },
-        { key: "contactTitle", sortable: true },
-        { key: "address.city" },
-        { key: "actions" }
-      ],
-      suppliers: []
-    };
-  },
-  created() {
-    SupplierService.getSuppliers()
-      .then(r => (this.suppliers = r.data))
-      .catch(err => console.error(err));
-  }
-};
+    data() {
+        return {
+            suppliers: []
+        }
+    },
+    created() {
+        SupplierService.getSuppliers()
+            .then(r => (this.suppliers = r.data))
+            .catch(err => console.error(err))
+    }
+}
 </script>
 
-<style>
+<style scoped>
 </style>

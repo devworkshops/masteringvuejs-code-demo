@@ -1,27 +1,27 @@
 <template>
-  <div id="app">
-    <header>
-      <nav-bar></nav-bar>
-    </header>
+    <div id="app">
+        <header>
+            <nav-bar></nav-bar>
+        </header>
 
-    <b-container>
-      <b-row>
-        <b-col>
-          <main role="main" class="flex-shrink-0">
-            <div class="container">
-              <router-view/>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <main role="main" class="flex-shrink-0">
+                        <div class="container">
+                            <router-view/>
+                        </div>
+                    </main>
+                </div>
             </div>
-          </main>
-        </b-col>
-      </b-row>
-    </b-container>
+        </div>
 
-    <footer class="footer mt-auto py-3">
-      <div class="container">
-        <span class="text-muted">Northwind Traders &copy; {{new Date()|date('YYYY')}}</span>
-      </div>
-    </footer>
-  </div>
+        <footer class="footer mt-auto py-3">
+            <div class="container">
+                <span class="text-muted">Northwind Traders &copy; {{new Date()|date('YYYY')}}</span>
+            </div>
+        </footer>
+    </div>
 </template>
 
 <script>
