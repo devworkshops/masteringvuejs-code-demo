@@ -12,7 +12,6 @@ install:
   - npm ci
 before_script:
   # Install Webpack version
-  - cd testing
   - if [[ -n "$WEBPACK_VERSION" ]]; then npm install --no-save webpack@$WEBPACK_VERSION; fi
 branches:
   # trying to limit to the testing branch only
