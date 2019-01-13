@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/devworkshops/masteringvuejs-code-demo.svg?branch=testing)](https://travis-ci.org/devworkshops/masteringvuejs-code-demo)
