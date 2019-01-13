@@ -59,11 +59,11 @@ export default {
         save() {
             if (this.id) {
                 SupplierService.updateSupplier(this.model)
-                    .then(r => this.navigateBack())
+                    .then(() => this.navigateBack())
                     .catch(err => console.error(err))
             } else {
                 SupplierService.createSupplier(this.model)
-                    .then(r => this.navigateBack())
+                    .then(() => this.navigateBack())
                     .catch(err => console.error(err))
             }
         },

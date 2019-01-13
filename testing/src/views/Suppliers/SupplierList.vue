@@ -11,26 +11,26 @@
 </template>
 
 <script>
-import { SupplierService } from "@/services/NorthwindService.js";
+import { SupplierService } from '@/services/NorthwindService.js'
 export default {
-  data() {
-    return {
-      fields: [
-        { key: "companyName", sortable: true },
-        { key: "contactName", sortable: true },
-        { key: "contactTitle", sortable: true },
-        { key: "address.city" },
-        { key: "actions" }
-      ],
-      suppliers: []
-    };
-  },
-  created() {
-    SupplierService.getSuppliers()
-      .then(r => (this.suppliers = r.data))
-      .catch(err => console.error(err));
-  }
-};
+    data() {
+        return {
+            fields: [
+                { key: 'companyName', sortable: true },
+                { key: 'contactName', sortable: true },
+                { key: 'contactTitle', sortable: true },
+                { key: 'address.city' },
+                { key: 'actions' }
+            ],
+            suppliers: []
+        }
+    },
+    created() {
+        SupplierService.getSuppliers()
+            .then(r => (this.suppliers = r.data))
+            .catch(err => console.error(err))
+    }
+}
 </script>
 
 <style>

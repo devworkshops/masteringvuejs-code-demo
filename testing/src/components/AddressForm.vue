@@ -29,13 +29,13 @@
 
 <script>
 export default {
-  props: {
-    address: {
-      type: Object,
-      required: true
+    props: {
+        address: {
+            type: Object,
+            required: true
+        }
     }
-  }
-};
+}
 </script>
 
 <style>
