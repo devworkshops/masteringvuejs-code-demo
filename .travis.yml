@@ -7,7 +7,7 @@ env:
   - WEBPACK_VERSION=4
 install:
   # Use npm 5.7.x since it has introduced `npm ci`
-  - cd testing
+  - cd 4-testing
   - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
   - npm ci
 before_script:
