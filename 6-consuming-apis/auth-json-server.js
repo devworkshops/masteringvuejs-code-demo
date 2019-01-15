@@ -40,8 +40,16 @@ server.post('/auth/login', (req, res) => {
         res.status(status).json({ status, message })
         return
     }
-    const access_token = createToken({ email, password })
+    var user = userdb.users.find(
+        u => u.email === email && u.password === password
+    )
+    const access_token = createToken({ email: user.email, name: user.name })
     res.status(200).json({ access_token })
+})
+
+server.get('/user', (req, res) => {
+    res.status(200).json(jwt.decode(req.headers.authorization.split(' ')[1]))
+    return
 })
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
