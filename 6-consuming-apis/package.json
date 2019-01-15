@@ -7,6 +7,7 @@
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
         "json-server": "json-server db.json --port 3000",
+        "json-server-auth": "node auth-json-server.js",
         "test:e2e": "vue-cli-service test:e2e",
         "test:e2e:headless": "vue-cli-service test:e2e --headless",
         "test:e2e:ci": "npm-run-all -p -r json-server test:e2e:headless",
@@ -15,6 +16,7 @@
     "dependencies": {
         "axios": "^0.18.0",
         "bootstrap-vue": "^2.0.0-rc.11",
+        "jsonwebtoken": "^8.4.0",
         "momentjs": "^2.0.0",
         "vue": "^2.5.21",
         "vue-feather-icons": "4.7.1",
