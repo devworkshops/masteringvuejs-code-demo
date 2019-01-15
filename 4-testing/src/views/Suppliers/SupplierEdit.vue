@@ -48,7 +48,7 @@ export default {
     },
     created() {
         if (this.id) {
-            SupplierService.getSupplier(this.id).then(
+            SupplierService.get(this.id).then(
                 r => (this.model = r.data)
             )
         } else {
@@ -58,11 +58,11 @@ export default {
     methods: {
         save() {
             if (this.id) {
-                SupplierService.updateSupplier(this.model)
+                SupplierService.update(this.model)
                     .then(() => this.navigateBack())
                     .catch(err => console.error(err))
             } else {
-                SupplierService.createSupplier(this.model)
+                SupplierService.create(this.model)
                     .then(() => this.navigateBack())
                     .catch(err => console.error(err))
             }

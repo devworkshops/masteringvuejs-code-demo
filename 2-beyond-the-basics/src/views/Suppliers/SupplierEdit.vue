@@ -42,11 +42,11 @@ export default {
         }
     },
     created() {
-        SupplierService.getSupplier(this.id).then(r => (this.model = r.data))
+        SupplierService.get(this.id).then(r => (this.model = r.data))
     },
     methods: {
         save() {
-            SupplierService.updateSupplier(this.model)
+            SupplierService.update(this.model)
                 .then(() => this.navigateBack())
                 .catch(err => console.error(err))
         },
