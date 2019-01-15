@@ -52,27 +52,37 @@ export const AuthService = {
     currentUser: undefined,
     currentToken: undefined,
     isLoggedIn() {
-        return this.currentUser != undefined
+        return !!this.currentToken
     },
-    login(username, password) {
+    login(email, password) {
         return apiClient
-            .post('/auth/login', { username, password })
+            .post('/auth/login', { email, password })
             .then(response => {
                 this.currentToken = response.data.access_token
                 localStorage.setItem('token', this.currentToken)
+                this.user()
                 return response
             })
     },
     logout() {
-        this.currentToken = undefined
-        localStorage.setItem('token', undefined)
+        this.currentToken = null
+        localStorage.removeItem('token')
+        window.location = window.location
     },
     token() {
-        if (!this.currentToken)
+        if (!this.currentToken) {
             this.currentToken = localStorage.getItem('token')
+            if (this.currentToken) {
+                this.user()
+            }
+        }
         return this.currentToken
     },
     user() {
-        return apiClient.get('/user').then()
+        console.log('user')
+        return apiClient.get('/user').then(response => {
+            console.log(response)
+            this.currentUser = response.data
+        })
     }
 }

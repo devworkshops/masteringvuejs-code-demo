@@ -26,10 +26,14 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import { AuthService } from '@/services/NorthwindService.js'
 
 export default {
     components: {
         NavBar
+    },
+    created(){
+      AuthService.token()
     }
 }
 </script>

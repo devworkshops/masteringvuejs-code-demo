@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import NotFound from './views/NotFound.vue'
 import Unauthorized from './views/Unauthorized.vue'
+import Login from './views/Login.vue'
 
 Vue.use(Router)
 
@@ -39,6 +40,10 @@ export default new Router({
             name: 'suppliers-edit',
             component: () => import('./views/Suppliers/SupplierEdit.vue'),
             props: true
+        },
+        {
+            path: '/login',
+            component: Login
         },
         {
             path: '/unauthorized',
