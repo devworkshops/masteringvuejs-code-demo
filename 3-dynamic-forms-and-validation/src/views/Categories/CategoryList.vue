@@ -60,7 +60,9 @@
                         v-model="addingCategory.name"
                         placeholder="Name..."
                         class="form-control"
+                        :class="{ 'is-invalid': errors && errors.name }"
                     >
+                    <div class="invalid-feedback" v-if="errors && errors.name">{{ errors.name }}</div>
                 </td>
                 <td>
                     <input
@@ -68,7 +70,12 @@
                         v-model="addingCategory.description"
                         placeholder="Description..."
                         class="form-control"
+                        :class="{ 'is-invalid': errors && errors.description }"
                     >
+                    <div
+                        class="invalid-feedback"
+                        v-if="errors && errors.description"
+                    >{{ errors.description }}</div>
                 </td>
                 <td>
                     <div class="btn-group" role="group">
@@ -87,6 +94,7 @@ import { CategoriesService } from '@/services/NorthwindService.js'
 export default {
     data() {
         return {
+            errors: null,
             categories: [],
             editingCategory: {},
             editingIndex: null,
@@ -104,6 +112,21 @@ export default {
         this.fetchAll()
     },
     methods: {
+        validate(category) {
+            this.errors = {}
+
+            if (!category.name || !category.name.trim()) {
+                this.errors.name = 'Name is a required field'
+            }
+            if (!category.description || !category.description.trim()) {
+                this.errors.description = 'Description is a required field'
+            }
+
+            // If no errors added, set errors to null
+            if (Object.keys(this.errors).length === 0) {
+                this.errors = null
+            }
+        },
         fetchAll() {
             CategoriesService.getAll()
                 .then(result => (this.categories = result.data))
@@ -130,6 +153,11 @@ export default {
                 .catch(error => console.error(error))
         },
         add() {
+            this.validate(this.addingCategory)
+            if (this.errors) {
+                return
+            }
+
             CategoriesService.add(this.addingCategory)
                 .then(result => {
                     this.categories.push(result.data)
@@ -138,6 +166,7 @@ export default {
                 .catch(error => console.error(error))
         },
         resetAdd() {
+            this.errors = null
             this.addingCategory = { ...this.defaultCategory }
         }
     }
