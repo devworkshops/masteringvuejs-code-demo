@@ -1,4 +1,6 @@
 import axios from 'axios'
+import NProgress from 'nprogress'
+import router from '@/router'
 
 const apiClient = axios.create({
     baseURL: `//localhost:3000`,
@@ -8,6 +10,22 @@ const apiClient = axios.create({
         'Content-Type': 'application/json'
     }
 })
+
+apiClient.interceptors.request.use(config => {
+    NProgress.start()
+    return config
+})
+
+apiClient.interceptors.response.use(
+    config => {
+        NProgress.done()
+        return config
+    },
+    err => {
+        NProgress.done()
+        if (err.response.status == 401) router.push('/unauthorized')
+    }
+)
 
 export const SupplierService = {
     getAll() {
