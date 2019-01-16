@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuelidate from 'vuelidate'
 import App from './App.vue'
 import router from './router'
 
@@ -48,6 +49,8 @@ requireFilters.keys().forEach(fileName => {
     )
     Vue.filter(componentName, componentConfig.default)
 })
+
+Vue.use(Vuelidate)
 
 new Vue({
     router,

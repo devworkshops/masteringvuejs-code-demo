@@ -54,5 +54,10 @@ export const ProductsService = {
     },
     delete(id) {
         return apiClient.delete('/products/' + id)
+    },
+    isUniqueProductName(name) {
+        return apiClient.get('/products?name=' + name).then(result => {
+            return result.data.length === 0
+        })
     }
 }

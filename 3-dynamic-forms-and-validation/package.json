@@ -11,9 +11,10 @@
         "axios": "^0.18.0",
         "momentjs": "^2.0.0",
         "vue": "^2.5.21",
+        "vue-feather-icons": "4.7.1",
         "vue-moment": "^4.0.0",
         "vue-router": "^3.0.1",
-        "vue-feather-icons": "4.7.1"
+        "vuelidate": "^0.7.4"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.0.5",
