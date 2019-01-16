@@ -35,7 +35,7 @@ export default {
         }
     },
     created() {
-        SupplierService.getSuppliers()
+        SupplierService.getAll()
             .then(r => (this.suppliers = r.data))
             .catch(err => console.error(err))
     }

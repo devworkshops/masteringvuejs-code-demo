@@ -17,12 +17,12 @@ export const SupplierService = {
         return apiClient.get('/suppliers/' + id)
     },
     update(supplier) {
-        return apiClient.put('/suppliers/' + supplier.id, supplier);
+        return apiClient.put('/suppliers/' + supplier.id, supplier)
     },
     create(supplier) {
-        return apiClient.post('/suppliers/', supplier);
+        return apiClient.post('/suppliers/', supplier)
     },
     delete(id) {
-        return apiClient.delete('/suppliers/' + id);
+        return apiClient.delete('/suppliers/' + id)
     }
 }
