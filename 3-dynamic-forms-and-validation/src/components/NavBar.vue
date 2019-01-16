@@ -14,19 +14,16 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <router-link to="/" :exact="true" class="nav-link">
-                            <home-icon></home-icon>Home
-                        </router-link>
+                        <router-link to="/" :exact="true" class="nav-link">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/suppliers" :exact="true" class="nav-link">
-                            <package-icon></package-icon>Suppliers
-                        </router-link>
+                        <router-link to="/suppliers" :exact="true" class="nav-link">Suppliers</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/categories" :exact="true" class="nav-link">
-                            <list-icon></list-icon>Categories
-                        </router-link>
+                        <router-link to="/categories" :exact="true" class="nav-link">Categories</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/products" :exact="true" class="nav-link">Products</router-link>
                     </li>
                 </ul>
             </div>
@@ -35,24 +32,11 @@
 </template>
 
 <script>
-import { HomeIcon, PackageIcon, ListIcon } from 'vue-feather-icons'
-
-export default {
-    components: {
-        HomeIcon,
-        PackageIcon,
-        ListIcon
-    }
-}
+export default {}
 </script>
 
 <style scoped>
 .nav > .container {
     min-height: 56px;
-}
-
-.navbar .nav-link .feather {
-    margin-right: 4px;
-    color: #999;
 }
 </style>

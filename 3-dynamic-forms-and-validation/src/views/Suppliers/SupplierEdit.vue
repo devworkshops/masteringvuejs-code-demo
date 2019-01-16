@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { SupplierService } from '@/services/NorthwindService.js'
+import { SuppliersService } from '@/services/NorthwindService.js'
 
 export default {
     props: {
@@ -42,11 +42,11 @@ export default {
         }
     },
     created() {
-        SupplierService.getSupplier(this.id).then(r => (this.model = r.data))
+        SuppliersService.get(this.id).then(r => (this.model = r.data))
     },
     methods: {
         save() {
-            SupplierService.updateSupplier(this.model)
+            SuppliersService.update(this.model)
                 .then(() => this.navigateBack())
                 .catch(err => console.error(err))
         },

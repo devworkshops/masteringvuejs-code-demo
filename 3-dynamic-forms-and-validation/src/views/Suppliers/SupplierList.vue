@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { SupplierService } from '@/services/NorthwindService.js'
+import { SuppliersService } from '@/services/NorthwindService.js'
 export default {
     data() {
         return {
@@ -35,7 +35,7 @@ export default {
         }
     },
     created() {
-        SupplierService.getSuppliers()
+        SuppliersService.getAll()
             .then(r => (this.suppliers = r.data))
             .catch(err => console.error(err))
     }
