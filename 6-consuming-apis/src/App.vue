@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <nav-bar></nav-bar>
+      <nav-bar :user="auth.currentUser"></nav-bar>
     </header>
 
     <b-container>
@@ -32,8 +32,14 @@ export default {
     components: {
         NavBar
     },
-    created(){
-      AuthService.token()
+    data() {
+        return {
+            auth: Object
+        }
+    },
+    created() {
+        this.auth = AuthService
+        AuthService.token()
     }
 }
 </script>

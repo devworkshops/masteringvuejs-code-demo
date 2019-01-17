@@ -66,8 +66,8 @@ export const AuthService = {
     },
     logout() {
         this.currentToken = null
+        this.currentUser = null
         localStorage.removeItem('token')
-        window.location = window.location
     },
     token() {
         if (!this.currentToken) {

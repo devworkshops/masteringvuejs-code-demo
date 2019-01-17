@@ -6,7 +6,7 @@
       <b-navbar-toggle target="navbarCollapse"></b-navbar-toggle>
 
       <b-collapse is-nav id="navbarCollapse">
-        <b-navbar-nav class="mr-auto" v-if="isLoggedIn()">
+        <b-navbar-nav class="mr-auto" v-if="isLoggedIn">
           <b-nav-item to="/" :exact="true">
             <home-icon></home-icon>Home
           </b-nav-item>
@@ -23,14 +23,14 @@
             <info-icon></info-icon>About
           </b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav v-if="isLoggedIn()">
+        <b-navbar-nav v-if="isLoggedIn">
           <b-nav-item v-b-toggle.collapseNotifications>
             <bell-icon></bell-icon>Notifications
             <b-badge>2</b-badge>
           </b-nav-item>
           <b-nav-item @click="logout()">Logout</b-nav-item>
         </b-navbar-nav>
-        <b-navbar-nav v-if="!isLoggedIn()">
+        <b-navbar-nav v-if="!isLoggedIn">
           <b-nav-item to="/login">Login</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -50,6 +50,9 @@ import {
 import { AuthService } from '@/services/NorthwindService.js'
 
 export default {
+    props: {
+        user: Object
+    },
     components: {
         HomeIcon,
         ListIcon,
@@ -59,14 +62,11 @@ export default {
         BellIcon
     },
     computed: {
-        user() {
-            return AuthService.currentUser
+        isLoggedIn() {
+            return !!this.user
         }
     },
     methods: {
-        isLoggedIn() {
-          return AuthService.currentToken
-        },
         logout() {
             AuthService.logout()
             this.$router.push('/')
