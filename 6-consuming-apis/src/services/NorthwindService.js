@@ -1,10 +1,10 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import router from '@/router'
+import config from '@/assets/config.json'
 
 const apiClient = axios.create({
-    baseURL: `//localhost:3000`,
-    // withCredentials: false, // This is the default
+    baseURL: config.baseUrl,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
