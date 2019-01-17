@@ -27,6 +27,7 @@ apiClient.interceptors.response.use(
     err => {
         NProgress.done()
         if (err.response.status == 401) router.push('/unauthorized')
+        throw err
     }
 )
 

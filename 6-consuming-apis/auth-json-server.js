@@ -89,6 +89,35 @@ server.post('/orders', (req, res, next) => {
     }
 })
 
+function validateSuppliers(req, res, next) {
+    console.log('validating')
+    const { address } = req.body
+    var errors = {}
+    if (!address) errors.address = 'Required'
+    else {
+        if (!address.street) errors['address.street'] = 'Required'
+        if (!address.city) errors['address.city'] = 'Required'
+        if (!address.region) errors['address.region'] = 'Required'
+        if (!address.postalCode) errors['address.postalCode'] = 'Required'
+        if (!address.country) errors['address.country'] = 'Required'
+        else {
+            if (address.country.toLowerCase() == 'australia') {
+                if (address.postalCode.length != 4) {
+                    errors['address.postalCode'] = 'Invalid'
+                }
+            }
+        }
+    }
+    if (Object.keys(errors).length > 0) {
+        res.status(422).json({ errors })
+    } else {
+        next()
+    }
+}
+
+server.post('/suppliers', validateSuppliers)
+server.put(/^\/suppliers\/.*$/, validateSuppliers)
+
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
     if (
         req.headers.authorization === undefined ||
