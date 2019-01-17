@@ -43,6 +43,9 @@ export const ProductsService = {
     getAll() {
         return apiClient.get('/products')
     },
+    getAllPaged(page) {
+        return apiClient.get(`/products?_page=${page}`)
+    },
     get(id) {
         return apiClient.get('/products/' + id)
     },
