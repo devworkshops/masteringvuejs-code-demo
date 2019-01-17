@@ -9,35 +9,18 @@
             >Add</router-link>
         </div>
 
-        <table class="table">
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Actions</th>
-            </tr>
-            <tr v-for="product in products" :key="product.id">
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.unitPrice }}</td>
-                <td>{{ product.unitsInStock }}</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <router-link
-                            tag="button"
-                            :to="{name:'products-edit',params:{id:product.id}}"
-                            class="btn btn-secondary"
-                        >Edit</router-link>
-                        <button
-                            type="button"
-                            class="btn btn-danger"
-                            @click="remove(product.id)"
-                        >Delete</button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <b-table striped hover :items="products" :fields="fields">
+            <template slot="actions" slot-scope="row">
+                <div class="btn-group" role="group">
+                    <router-link
+                        tag="button"
+                        :to="{name:'products-edit', params: { id: row.item.id }}"
+                        class="btn btn-secondary"
+                    >Edit</router-link>
+                    <button type="button" class="btn btn-danger" @click="remove(row.item.id)">Delete</button>
+                </div>
+            </template>
+        </b-table>
     </div>
 </template>
 
@@ -46,7 +29,16 @@ import { ProductsService } from '@/services/NorthwindService.js'
 
 export default {
     data() {
-        return { products: [] }
+        return {
+            products: [],
+            fields: [
+                { key: 'id', sortable: true },
+                { key: 'name', sortable: true },
+                { key: 'unitPrice', sortable: true, label: 'Price' },
+                { key: 'unitsInStock', sortable: true, label: 'Stock' },
+                { key: 'actions' }
+            ]
+        }
     },
     created() {
         this.fetchAll()
