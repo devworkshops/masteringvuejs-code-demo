@@ -11,6 +11,7 @@ Vue.config.productionTip = false
 
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
+import axios from 'axios'
 
 const requireComponent = require.context(
     './components',
@@ -52,6 +53,11 @@ requireFilters.keys().forEach(fileName => {
         camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
     )
     Vue.filter(componentName, componentConfig.default)
+})
+
+axios.get('static/config.json').then(response => {
+    console.log(response.data)
+    axios.defaults.baseURL = response.data.baseUrl
 })
 
 new Vue({

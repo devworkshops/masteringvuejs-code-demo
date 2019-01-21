@@ -1,10 +1,10 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import router from '@/router'
-import config from '@/assets/config.json'
+// import config from '@/assets/config.json'
 
 const apiClient = axios.create({
-    baseURL: config.baseUrl,
+    //baseURL: process.env.VUE_APP_BASE_URL,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -12,10 +12,12 @@ const apiClient = axios.create({
 })
 
 apiClient.interceptors.request.use(config => {
-    if (AuthService.token()) {
-        config.headers.authorization = 'Bearer ' + AuthService.token()
+    if (axios.defaults.baseURL) {
+        if (AuthService.token()) {
+            config.headers.authorization = 'Bearer ' + AuthService.token()
+        }
+        NProgress.start()
     }
-    NProgress.start()
     return config
 })
 
