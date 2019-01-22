@@ -56,7 +56,6 @@ requireFilters.keys().forEach(fileName => {
 })
 
 axios.get('static/config.json').then(response => {
-    console.log(response.data)
     axios.defaults.baseURL = response.data.baseUrl
 })
 
