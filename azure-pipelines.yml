@@ -3,48 +3,41 @@ queue:
   demands: npm
 
 trigger:
-- master
+  - master
 
 steps:
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    workingDir: '6-consuming-apis'
+  - task: Npm@1
+    displayName: "npm install"
+    inputs:
+      workingDir: "6-consuming-apis"
+      verbose: false
 
-    verbose: false
+  - task: Npm@1
+    displayName: "unit testing"
+    inputs:
+      command: custom
+      workingDir: "6-consuming-apis"
+      verbose: false
+      customCommand: "run test:unit"
 
+  - task: Npm@1
+    displayName: "e2e testing"
+    inputs:
+      command: custom
+      workingDir: "6-consuming-apis"
+      verbose: false
+      customCommand: "run test:e2e:ci"
 
-- task: Npm@1
-  displayName: 'npm custom'
-  inputs:
-    command: custom
+  - task: Npm@1
+    displayName: "build"
+    inputs:
+      command: custom
+      workingDir: "6-consuming-apis"
+      verbose: false
+      customCommand: "run build"
 
-    workingDir: '6-consuming-apis'
-
-    verbose: false
-
-    customCommand: 'run test:unit'
-
-
-- task: Npm@1
-  displayName: 'npm custom'
-  inputs:
-    command: custom
-
-    workingDir: '6-consuming-apis'
-
-    verbose: false
-
-    customCommand: 'run test:e2e:ci'
-
-
-- task: Npm@1
-  displayName: 'npm custom'
-  inputs:
-    command: custom
-
-    workingDir: '6-consuming-apis'
-
-    verbose: false
-
-    customCommand: 'run build'
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact: frontend"
+    inputs:
+      PathtoPublish: "6-consuming-apis/dist"
+      ArtifactName: frontend
