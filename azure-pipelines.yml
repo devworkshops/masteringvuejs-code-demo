@@ -2,6 +2,9 @@ queue:
   name: Hosted VS2017
   demands: npm
 
+trigger:
+- master
+
 steps:
 - task: Npm@1
   displayName: 'npm install'
