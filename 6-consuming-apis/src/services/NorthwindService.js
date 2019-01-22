@@ -82,9 +82,7 @@ export const AuthService = {
         return this.currentToken
     },
     user() {
-        console.log('user')
         return apiClient.get('/user').then(response => {
-            console.log(response)
             this.currentUser = response.data
         })
     }

@@ -4,7 +4,8 @@
     <form class="form">
       <div class="form-group row">
         <label class="col-form-label">Company Name</label>
-        <input type="text" class="form-control" id="companyNameField" v-model="model.companyName">
+        <input type="text" class="form-control" id="companyNameField" v-model="model.companyName" :class="{ 'is-invalid': errors && errors.companyName }">
+        <div class="invalid-feedback" v-if="errors && errors.companyName">{{ errors.companyName }}</div>
       </div>
       <div class="form-group row">
         <label class="col-form-label">Contact Name</label>

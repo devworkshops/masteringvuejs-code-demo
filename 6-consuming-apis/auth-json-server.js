@@ -91,8 +91,12 @@ server.post('/orders', (req, res, next) => {
 
 function validateSuppliers(req, res, next) {
     console.log('validating')
-    const { address } = req.body
+    const { address, companyName, contactName, contactTitle } = req.body
     var errors = {}
+
+    if (!companyName) errors.companyName = 'Required'
+    if (!contactName) errors.contactName = 'Required'
+    if (!contactTitle) errors.contactTitle = 'Required'
     if (!address) errors.address = 'Required'
     else {
         if (!address.street) errors['address.street'] = 'Required'
