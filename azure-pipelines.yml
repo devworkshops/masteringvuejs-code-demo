@@ -15,28 +15,33 @@ steps:
   displayName: 'npm install'
   inputs:
     command: install
+    workingDir: '6-consuming-apis'
 
 - task: Npm@1
   displayName: 'npm run test:uni'
   inputs:
     command: custom
     customCommand: 'test:unit'
+    workingDir: '6-consuming-apis'
 
 - task: Npm@2
   displayName: 'npm run test:e2e'
   inputs:
     command: custom
     customCommand: 'test:e2e'
+    workingDir: '6-consuming-apis'
 
 - task: Npm@3
   displayName: 'npm run build'
   inputs:
     command: custom
     customCommand: 'build'
+    workingDir: '6-consuming-apis'
     
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
+    workingDir: '6-consuming-apis'
 
 - task: PublishBuildArtifacts@1
