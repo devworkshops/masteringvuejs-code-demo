@@ -2,15 +2,6 @@ import { shallowMount, mount } from '@vue/test-utils'
 import HelloWorld from '@/components/HelloWorld.vue'
 import AddressForm from '@/components/AddressForm.vue'
 import Counter from '@/components/Counter.vue'
-import App from '@/App.vue'
-
-describe('App.vue', () => {
-    it('footer should show current year', () => {
-        const year = new Date().getFullYear()
-        const wrapper = mount(App)
-        expect(wrapper.find('.footer').text()).toMatch(JSON.stringify(year))
-    })
-})
 
 describe('HelloWorld.vue', () => {
     it('renders props.msg when passed', () => {
