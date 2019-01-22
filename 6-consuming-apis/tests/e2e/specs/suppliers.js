@@ -14,6 +14,9 @@ describe('Suppliers', () => {
         cy.contains('h1', 'Supplier #')
         cy.get('input#companyNameField').type('NEW COMPANY')
         cy.get('button#saveButton').click()
+
+        cy.wait(1000)
+
         cy.contains('table tbody td:first-child', 'NEW COMPANY')
     })
 
@@ -24,6 +27,9 @@ describe('Suppliers', () => {
         cy.get('input#contactTitleField').type('CONTACT TITLE')
         cy.get('input#contactNameField').type('.')
         cy.get('button#saveButton').click()
+
+        cy.wait(1000)
+
         cy.contains('table tbody tr:last-child td:first-child', 'NEW COMPANY')
     })
 })
