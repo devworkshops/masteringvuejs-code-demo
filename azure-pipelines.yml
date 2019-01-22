@@ -1,47 +1,47 @@
-# Build NodeJS Express app using Azure Pipelines
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript?view=vsts
-pool:
-  vmImage: 'Ubuntu 16.04'
-  
-trigger:
-- master
+queue:
+  name: Hosted VS2017
+  demands: npm
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '8.x'
-  
 - task: Npm@1
   displayName: 'npm install'
   inputs:
-    command: install
     workingDir: '6-consuming-apis'
+
+    verbose: false
+
 
 - task: Npm@1
-  displayName: 'npm run test:uni'
+  displayName: 'npm custom'
   inputs:
     command: custom
-    customCommand: 'test:unit'
+
     workingDir: '6-consuming-apis'
 
-- task: Npm@2
-  displayName: 'npm run test:e2e'
+    verbose: false
+
+    customCommand: 'run test:unit'
+
+
+- task: Npm@1
+  displayName: 'npm custom'
   inputs:
     command: custom
-    customCommand: 'test:e2e'
+
     workingDir: '6-consuming-apis'
 
-- task: Npm@3
-  displayName: 'npm run build'
+    verbose: false
+
+    customCommand: 'run test:e2e:ci'
+
+
+- task: Npm@1
+  displayName: 'npm custom'
   inputs:
     command: custom
-    customCommand: 'build'
-    workingDir: '6-consuming-apis'
-    
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-    includeRootFolder: false
+
     workingDir: '6-consuming-apis'
 
-- task: PublishBuildArtifacts@1
+    verbose: false
+
+    customCommand: 'run build'
