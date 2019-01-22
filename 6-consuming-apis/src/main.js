@@ -55,7 +55,7 @@ requireFilters.keys().forEach(fileName => {
     Vue.filter(componentName, componentConfig.default)
 })
 
-axios.get('static/config.json').then(response => {
+axios.get('/static/config.json').then(response => {
     axios.defaults.baseURL = response.data.baseUrl
 })
 
