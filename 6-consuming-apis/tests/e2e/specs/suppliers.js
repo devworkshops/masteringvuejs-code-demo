@@ -13,12 +13,14 @@ describe('Suppliers', () => {
         cy.get('a.suppliers-edit:first').click()
         cy.contains('h1', 'Supplier #')
         cy.get('input#companyNameField').type('NEW COMPANY')
-        cy.get('button#saveButton').click()
+        cy.get('button#saveButton').click({ timeout: 1000 })
 
-        cy.visit('/supplier')
-        cy.wait(1000)
-
-        cy.contains('table tbody td:first-child', 'NEW COMPANY')
+        cy.get('table tbody td:first-child', {
+            log: true,
+            timeout: 1000
+        }).should($td => {
+            expect($td).to.contain('NEW COMPANY')
+        })
     })
 
     it('Should create new supplier', () => {
@@ -27,11 +29,12 @@ describe('Suppliers', () => {
         cy.get('input#contactNameField').type('NEW CONTACT')
         cy.get('input#contactTitleField').type('CONTACT TITLE')
         cy.get('input#contactNameField').type('.')
-        cy.get('button#saveButton').click()
-
-        cy.visit('/supplier')
-        cy.wait(1000)
-
-        cy.contains('table tbody tr:last-child td:first-child', 'NEW COMPANY')
+        cy.get('button#saveButton').click({ timeout: 1000 })
+        cy.get('table tbody tr:last-child td:first-child', {
+            log: true,
+            timeout: 1000
+        }).should($td => {
+            expect($td).to.contain('NEW COMPANY')
+        })
     })
 })
