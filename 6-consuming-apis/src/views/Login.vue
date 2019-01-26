@@ -8,7 +8,7 @@
       </div>
       <div class="form-group row">
         <label class="col-form-label">Password</label>
-        <input type="text" class="form-control" v-model="model.password">
+        <input type="password" class="form-control" v-model="model.password">
       </div>
       <div class="row">
         <button class="btn btn-primary" @click.prevent="login()">Login</button>
