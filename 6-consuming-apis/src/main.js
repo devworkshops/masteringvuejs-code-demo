@@ -57,9 +57,10 @@ requireFilters.keys().forEach(fileName => {
 
 axios.get('/static/config.json').then(response => {
     axios.defaults.baseURL = response.data.baseUrl
+
+    new Vue({
+        router,
+        render: h => h(App)
+    }).$mount('#app')
 })
 
-new Vue({
-    router,
-    render: h => h(App)
-}).$mount('#app')

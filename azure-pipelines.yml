@@ -20,13 +20,13 @@ steps:
       verbose: false
       customCommand: "run test:unit"
 
-  # - task: Npm@1
-  #   displayName: "e2e testing"
-  #   inputs:
-  #     command: custom
-  #     workingDir: "6-consuming-apis"
-  #     verbose: false
-  #     customCommand: "run test:e2e:ci"
+  - task: Npm@1
+    displayName: "e2e testing"
+    inputs:
+      command: custom
+      workingDir: "6-consuming-apis"
+      verbose: false
+      customCommand: "run test:e2e:ci"
 
   - task: Npm@1
     displayName: "build"
