@@ -15,7 +15,7 @@ describe('Suppliers', () => {
         cy.get('input#companyNameField').type('NEW COMPANY')
         cy.get('button#saveButton').click({ timeout: 1000 })
 
-        cy.get('table tbody td:first-child', {
+        cy.get('table tbody td:first', {
             log: true,
             timeout: 1000
         }).should($td => {
@@ -30,7 +30,7 @@ describe('Suppliers', () => {
         cy.get('input#contactTitleField').type('CONTACT TITLE')
         cy.get('input#contactNameField').type('.')
         cy.get('button#saveButton').click({ timeout: 1000 })
-        cy.get('table tbody tr:last-child td:first-child', {
+        cy.get('table tbody tr:last td:first', {
             log: true,
             timeout: 1000
         }).should($td => {
