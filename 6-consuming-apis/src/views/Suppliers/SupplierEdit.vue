@@ -4,7 +4,8 @@
     <form class="form">
       <div class="form-group row">
         <label class="col-form-label">Company Name</label>
-        <input type="text" class="form-control" id="companyNameField" v-model="model.companyName">
+        <input type="text" class="form-control" id="companyNameField" v-model="model.companyName" :class="{ 'is-invalid': errors && errors.companyName }">
+        <div class="invalid-feedback" v-if="errors && errors.companyName">{{ errors.companyName }}</div>
       </div>
       <div class="form-group row">
         <label class="col-form-label">Contact Name</label>
@@ -16,7 +17,7 @@
       </div>
       <div class="form-group" v-if="model.address">
         <label class="col-form-label">Address</label>
-        <address-form :address="model.address"></address-form>
+        <address-form :address="model.address" :errors="errors"></address-form>
       </div>
     </form>
     <p>
@@ -37,20 +38,18 @@ import { SupplierService } from '@/services/NorthwindService.js'
 export default {
     props: {
         id: {
-            type: String,
-            required: true
+            type: String
         }
     },
     data() {
         return {
-            model: Object
+            model: Object,
+            errors: Object
         }
     },
     created() {
         if (this.id) {
-            SupplierService.get(this.id).then(
-                r => (this.model = r.data)
-            )
+            SupplierService.get(this.id).then(r => (this.model = r.data))
         } else {
             this.model = { address: {} }
         }
@@ -60,11 +59,19 @@ export default {
             if (this.id) {
                 SupplierService.update(this.model)
                     .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .catch(err => {
+                        if (err.response.status == 422) {
+                            this.errors = err.response.data.errors
+                        }
+                    })
             } else {
                 SupplierService.create(this.model)
-                    .then(() => this.navigateBack())
-                    .catch(err => console.error(err))
+                    .then(res => this.navigateBack())
+                    .catch(err => {
+                        if (err.response.status == 422) {
+                            this.errors = err.response.data.errors
+                        }
+                    })
             }
         },
         navigateBack() {

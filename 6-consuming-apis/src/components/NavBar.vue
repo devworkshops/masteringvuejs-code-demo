@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="md" type="dark" placement="fixed" fill="false" variant="dark">
     <div class="container">
-      <b-navbar-brand to="/">Northwind Traders</b-navbar-brand>
+      <b-navbar-brand to="/">{{title}}</b-navbar-brand>
 
       <b-navbar-toggle target="navbarCollapse"></b-navbar-toggle>
 
@@ -64,6 +64,9 @@ export default {
     computed: {
         isLoggedIn() {
             return !!this.user
+        },
+        title() {
+            return process.env.VUE_APP_TITLE
         }
     },
     methods: {

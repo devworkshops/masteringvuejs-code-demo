@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const server = jsonServer.create()
 const router = jsonServer.router('./db.json')
+const db = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'))
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 server.use(jsonServer.defaults())
 server.use(bodyParser.urlencoded({ extended: true }))
@@ -51,6 +52,75 @@ server.get('/user', (req, res) => {
     res.status(200).json(jwt.decode(req.headers.authorization.split(' ')[1]))
     return
 })
+
+server.post('/orders', (req, res, next) => {
+    const { customerID, employeeID, orderDate } = req.body
+    //todo, check every data
+    var errors = []
+
+    if (!customerID) errors.push({ customerID: ['Required'] })
+    else {
+        if (db.customers.findIndex(c => c.id == customerID) < 0) {
+            errors.push({ customerID: ['Invalid'] })
+        }
+    }
+    if (!employeeID) errors.push({ employeeID: ['Required'] })
+    else {
+        if (db.employees.findIndex(c => c.id == employeeID) < 0) {
+            errors.push({ employeeID: ['Invalid'] })
+        }
+    }
+    if (!orderDate) errors.push({ orderDate: ['Required'] })
+    else {
+        var dt = new Date(orderDate)
+        if (!isNaN(dt.getTime())) {
+            if (new Date(orderDate) > new Date()) {
+                errors.push({ orderDate: ['FutureDate'] })
+            }
+        } else {
+            errors.push({ orderDate: ['Invalid'] })
+        }
+    }
+
+    if (errors.length > 0) {
+        res.status(422).json({ errors })
+    } else {
+        next()
+    }
+})
+
+function validateSuppliers(req, res, next) {
+    console.log('validating')
+    const { address, companyName, contactName, contactTitle } = req.body
+    var errors = {}
+
+    if (!companyName) errors.companyName = 'Required'
+    if (!contactName) errors.contactName = 'Required'
+    if (!contactTitle) errors.contactTitle = 'Required'
+    if (!address) errors.address = 'Required'
+    else {
+        if (!address.street) errors['address.street'] = 'Required'
+        if (!address.city) errors['address.city'] = 'Required'
+        if (!address.region) errors['address.region'] = 'Required'
+        if (!address.postalCode) errors['address.postalCode'] = 'Required'
+        if (!address.country) errors['address.country'] = 'Required'
+        else {
+            if (address.country.toLowerCase() == 'australia') {
+                if (address.postalCode.length != 4) {
+                    errors['address.postalCode'] = 'Invalid'
+                }
+            }
+        }
+    }
+    if (Object.keys(errors).length > 0) {
+        res.status(422).json({ errors })
+    } else {
+        next()
+    }
+}
+
+server.post('/suppliers', validateSuppliers)
+server.put(/^\/suppliers\/.*$/, validateSuppliers)
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
     if (
