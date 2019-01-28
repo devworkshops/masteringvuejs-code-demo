@@ -34,6 +34,14 @@ export default {
 }
 </script>
 
+<style lang="scss">
+@import './assets/custom.scss';
+@import '~bootswatch/dist/Cosmo/variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/Cosmo/bootswatch';
+@import '~bootstrap-vue/dist/bootstrap-vue';
+</style>
+
 <style>
 html,
 body {

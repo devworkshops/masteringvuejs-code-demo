@@ -23,12 +23,12 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary" @click="update()">Update</button>
-                            <button
-                                type="button"
-                                class="btn btn-warning"
-                                @click="cancelUpdate()"
-                            >Cancel</button>
+                            <button type="button" class="btn btn-secondary" @click="update()">
+                                <vue-feather type="check"></vue-feather>
+                            </button>
+                            <button type="button" class="btn btn-warning" @click="cancelUpdate()">
+                                <vue-feather type="corner-up-left"></vue-feather>                       
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -38,16 +38,12 @@
                     <td>{{ category.description }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                @click="edit(category, index)"
-                            >Edit</button>
-                            <button
-                                type="button"
-                                class="btn btn-danger"
-                                @click="remove(category.id)"
-                            >Delete</button>
+                            <button type="button" class="btn btn-secondary" @click="edit(category, index)">
+                                <vue-feather type="edit-2"></vue-feather>
+                            </button>
+                            <button type="button" class="btn btn-danger" @click="remove(category.id)">
+                                <vue-feather type="x"></vue-feather>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -79,8 +75,12 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary" @click="add()">Add</button>
-                        <button type="button" class="btn btn-warning" @click="resetAdd()">Cancel</button>
+                        <button type="button" class="btn btn-secondary" @click="add()">
+                            <vue-feather type="plus"></vue-feather>
+                        </button>
+                        <button type="button" class="btn btn-warning" @click="resetAdd()">
+                            <vue-feather type="corner-up-left"></vue-feather>                            
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -90,8 +90,12 @@
 
 <script>
 import { CategoriesService } from '@/services/NorthwindService.js'
+import VueFeather from 'vue-feather'
 
 export default {
+    components: {
+        VueFeather
+    },
     data() {
         return {
             errors: null,
